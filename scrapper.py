@@ -28,7 +28,7 @@ def get_text_bs(html):
     return text
 
 def getContent(searchQuery="Booster") :
-    search_links = Google.search()
+    search_links = Google.search(searchQuery)
 
     plaintext = []    
     
