@@ -7,7 +7,7 @@ class Google:
     @classmethod
     def search(self, search):
         page = requests.get("http://www.google.com/search?q=site%3Aedu+OR+site%3Aorg+"+search)
-        soup = BeautifulSoup(page.content)
+        soup = BeautifulSoup(page.content, "html.parser")
         links = soup.find_all("a",href=re.compile("(?<=/url\?q=)(htt.*://.*)"))
         urls = [re.split(":(?=http)",link["href"].replace("/url?q=",""))[0] for link in links]
         return [url for url in urls if 'webcache' not in url]
@@ -35,10 +35,14 @@ def getContent(searchQuery="Booster") :
     for link in search_links:
         response = requests.get(link)
         soup = BeautifulSoup(response.content, "html5lib")
-        get_text_bs(soup.prettify())
-        plaintext.append(soup)
+        
+        text = get_text_bs(str(soup))
+        plaintext.append(text)
         
     return plaintext
+
+
+
 
 if __name__=="__main__":
     query = ""
@@ -47,3 +51,10 @@ if __name__=="__main__":
     
     query = query.strip() if len(query)>1 else "how+to+google"
     getContent(query)
+    
+
+if soup is not None:
+    text = get_text_bs(soup)
+    plaintext.append(text)
+        
+    
