@@ -46,15 +46,10 @@ def getContent(searchQuery="Booster") :
 
 if __name__=="__main__":
     query = ""
+    defaultQuery = "word+vectorization"
     for i in range(1,len(sys.argv)):
         query = query + sys.argv[i] + " "
     
-    query = query.strip() if len(query)>1 else "how+to+google"
+    query = query.strip() if len(query)>1 else defaultQuery
     getContent(query)
-    
-
-if soup is not None:
-    text = get_text_bs(soup)
-    plaintext.append(text)
-        
     
